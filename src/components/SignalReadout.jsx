@@ -272,3 +272,17 @@ export function SignalPanel() {
   );
 
 }
+export function TraceDivider() {
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: 1,
+        margin: "40px 0",
+        background:
+          "linear-gradient(90deg, transparent, #03A9F4, #9C27B0, transparent)",
+        opacity: 0.5,
+      }}
+    />
+  );
+}
