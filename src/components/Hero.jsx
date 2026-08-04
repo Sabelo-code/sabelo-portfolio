@@ -46,7 +46,7 @@ export default function Hero() {
             <a href="#contact" className="btn-primary">
               Get in touch <ArrowUpRight size={15} />
             </a>
-            <a href="/CV.pdf" download className="btn-outline">
+            <a href="/Sabelo_Tshazi_CV.pdf" download className="btn-outline">
               <Download size={15} /> Download CV
             </a>
           </Reveal>

@@ -3,216 +3,160 @@ import Reveal from "./Reveal";
 import { certificates } from "../data/certificates";
 import { theme } from "../theme";
 
-
 export default function Certificates() {
-
   return (
-
     <section
       id="certificates"
       style={{
-        maxWidth:1100,
-        margin:"0 auto",
-        padding:"20px 24px 60px"
+        maxWidth: 1100,
+        margin: "0 auto",
+        padding: "20px 24px 60px",
       }}
     >
-
-
       <Reveal>
-
-        <span
-          className="font-mono"
-          style={{
-            fontSize:11,
-            color:theme.slate
-          }}
-        >
-          04 · CERTIFICATIONS
-        </span>
-
-
         <h2
           className="font-display"
           style={{
-            fontSize:30,
-            margin:"10px 0 36px"
+            fontSize: 30,
+            fontWeight: 700,
+            textAlign: "center",
+            marginBottom: 40,
+            color: theme.paper,
           }}
         >
-          Professional certifications.
+          Certifications
         </h2>
-
-
       </Reveal>
 
-
-
       <div
-
         style={{
-
-          display:"grid",
-
-          gridTemplateColumns:
-          "repeat(auto-fit,minmax(260px,1fr))",
-
-          gap:20
-
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          gap: 22,
         }}
-
       >
+        {certificates.map((cert, index) => {
+          const isPdf =
+            cert.link &&
+            cert.link.toLowerCase().endsWith(".pdf");
 
-
-        {
-
-        certificates.map((cert,index)=>(
-
-
-          <Reveal
-          key={cert.title}
-          delay={index*80}
-          >
-
-
-            <div
-
-            className="card"
-
-            style={{
-
-              padding:22,
-
-              height:"100%"
-
-            }}
-
-            >
-
-
-              <Award
-              size={22}
-              color={theme.signal}
-              />
-
-
-              <h3
-
-              className="font-display"
-
-              style={{
-
-                fontSize:18,
-
-                margin:"16px 0 8px"
-
-              }}
-
-              >
-
-                {cert.title}
-
-              </h3>
-
-
-
-              <p
-
-              style={{
-
-                color:theme.mist,
-
-                fontSize:14,
-
-                marginBottom:8
-
-              }}
-
-              >
-
-                {cert.issuer}
-
-              </p>
-
-
-
-              <span
-
-              className="font-mono"
-
-              style={{
-
-                fontSize:11,
-
-                color:theme.signalSoft
-
-              }}
-
-              >
-
-                {cert.category}
-
-              </span>
-
-
-
-              {
-
-              cert.link !== "#" && (
-
+          return (
+            <Reveal key={cert.title} delay={index * 70}>
               <a
-
-              href={cert.link}
-
-              target="_blank"
-
-              rel="noreferrer"
-
-              style={{
-
-                display:"flex",
-
-                alignItems:"center",
-
-                gap:5,
-
-                marginTop:16,
-
-                color:theme.signal,
-
-                fontSize:13,
-
-                textDecoration:"none"
-
-              }}
-
+                href={cert.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="certificate-card"
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  display: "block",
+                  height: "100%",
+                }}
               >
+                <div
+                  className="card"
+                  style={{
+                    padding: 24,
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    borderRadius: 14,
+                    transition: "all .3s ease",
+                    cursor: "pointer",
+                  }}
+                >
+                  {/* Icon */}
+                  <div
+                    style={{
+                      width: 52,
+                      height: 52,
+                      borderRadius: 12,
+                      background:
+                        "linear-gradient(135deg,#03A9F4,#9C27B0)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginBottom: 18,
+                    }}
+                  >
+                    <Award size={26} color="#fff" />
+                  </div>
 
-                View Certificate
+                  {/* Certificate Title */}
+                  <h3
+                    className="font-display"
+                    style={{
+                      fontSize: 19,
+                      margin: 0,
+                      color: theme.paper,
+                    }}
+                  >
+                    {cert.title}
+                  </h3>
 
-                <ExternalLink size={14}/>
+                  {/* Issuer */}
+                  <p
+                    style={{
+                      color: theme.mist,
+                      margin: "12px 0 8px",
+                      lineHeight: 1.6,
+                      fontSize: 14,
+                    }}
+                  >
+                    {cert.issuer}
+                  </p>
 
+                  {/* Category */}
+                  <span
+                    className="font-mono"
+                    style={{
+                      display: "inline-block",
+                      width: "fit-content",
+                      padding: "5px 10px",
+                      borderRadius: 30,
+                      background: "rgba(3,169,244,.08)",
+                      color: theme.signalSoft,
+                      fontSize: 11,
+                      marginBottom: 22,
+                    }}
+                  >
+                    {cert.category}
+                  </span>
+
+                  {/* Button */}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      marginTop: "auto",
+                      paddingTop: 14,
+                      borderTop: `1px solid ${theme.line}`,
+                    }}
+                  >
+                    <span
+                      style={{
+                        color: theme.signal,
+                        fontWeight: 600,
+                        fontSize: 14,
+                      }}
+                    >
+                      {isPdf ? "View Certificate" : "Verify Certificate"}
+                    </span>
+
+                    <ExternalLink
+                      size={16}
+                      color={theme.signal}
+                    />
+                  </div>
+                </div>
               </a>
-
-              )
-
-              }
-
-
-            </div>
-
-
-          </Reveal>
-
-
-        ))
-
-        }
-
-
+            </Reveal>
+          );
+        })}
       </div>
-
-
     </section>
-
   );
-
 }
