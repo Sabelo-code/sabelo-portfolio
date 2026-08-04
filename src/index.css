@@ -651,3 +651,97 @@ body {
   transform: translateY(-6px);
   box-shadow: 0 15px 35px rgba(3,169,244,.12);
 }
+/* Signal Graph Card Hover */
+
+.signal-card {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    border-color .35s ease;
+}
+
+
+/* Gradient glow effect */
+
+.signal-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: var(--primary-gradient);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity .35s ease;
+  filter: blur(20px);
+}
+
+
+/* Hover */
+
+.signal-card:hover {
+
+  transform: translateY(-8px);
+
+  border-color: #03A9F4;
+
+  box-shadow:
+    0 25px 60px rgba(3,169,244,.18);
+
+}
+
+
+.signal-card:hover::before {
+
+  opacity: .25;
+
+}
+
+
+/* Make graph nodes react */
+
+.signal-card svg circle {
+
+  transition:
+    r .3s ease,
+    stroke-width .3s ease;
+
+}
+
+
+.signal-card:hover svg circle {
+
+  stroke-width:4;
+
+}
+
+
+/* Smooth text highlight */
+
+.signal-card:hover .font-mono {
+
+  color:#9C27B0;
+
+}
+.typing-cursor {
+
+color:#03A9F4;
+
+font-weight:700;
+
+animation:blink .7s infinite;
+
+}
+
+
+@keyframes blink {
+
+0%,100%{
+opacity:1;
+}
+
+50%{
+opacity:0;
+}
+
+}

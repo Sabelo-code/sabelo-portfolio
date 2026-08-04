@@ -239,22 +239,14 @@ return()=>clearInterval(animate);
 return(
 
 <div
-
-style={{
-
-background:"#fff",
-
-border:`1px solid ${theme.line}`,
-
-borderRadius:22,
-
-padding:26,
-
-boxShadow:
-"0 25px 70px rgba(15,23,42,.10)"
-
-}}
-
+  className="signal-card"
+  style={{
+    background: "#ffffff",
+    border: `1px solid ${theme.line}`,
+    borderRadius: 18,
+    padding: 24,
+    boxShadow: "0 20px 50px rgba(15,23,42,.08)",
+  }}
 >
 
 
@@ -722,4 +714,17 @@ System stable ✓
 )
 
 
+}
+export function TraceDivider() {
+  return (
+    <div
+      style={{
+        height: 1,
+        width: "100%",
+        margin: "50px 0",
+        background:
+          "linear-gradient(90deg, transparent, #CBD5E1, transparent)",
+      }}
+    />
+  );
 }
