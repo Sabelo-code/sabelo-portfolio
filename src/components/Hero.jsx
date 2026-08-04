@@ -1,4 +1,4 @@
-import { ArrowUpRight, Download, Network, BrainCircuit } from "lucide-react";
+import { ArrowUpRight, Download } from "lucide-react";
 import Reveal from "./Reveal";
 import { SignalPanel } from "./SignalReadout";
 import { theme } from "../theme";
@@ -10,248 +10,113 @@ export default function Hero() {
       style={{
         maxWidth: 1100,
         margin: "0 auto",
-        padding: "90px 24px 50px",
+        padding: "88px 24px 60px",
       }}
     >
-
       <div
         className="hero-grid"
         style={{
-          display:"grid",
-          gridTemplateColumns:"1.3fr 1fr",
-          gap:60,
-          alignItems:"center",
+          display: "grid",
+          gridTemplateColumns: "1.25fr 1fr",
+          gap: 60,
+          alignItems: "center",
         }}
       >
 
-
         <div>
 
-
           <Reveal>
-
             <span
               className="font-mono"
               style={{
-                fontSize:12,
-                color:theme.signalSoft,
-                display:"inline-flex",
-                alignItems:"center",
-                gap:8
+                fontSize: 12,
+                color: theme.signalSoft,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
               }}
             >
-
               <span
                 style={{
-                  width:7,
-                  height:7,
-                  borderRadius:"50%",
-                  background:theme.pulse,
-                  animation:"blink 1.6s infinite"
+                  width: 7,
+                  height: 7,
+                  borderRadius: "50%",
+                  background: theme.pulse,
+                  animation: "blink 1.6s infinite",
                 }}
               />
 
-              OPEN TO IT SUPPORT & SOFTWARE OPPORTUNITIES
-
+              COMPUTER SCIENCE • SYSTEMS • TECHNOLOGY
             </span>
-
-
           </Reveal>
 
 
-
           <Reveal delay={80}>
-
             <h1
-
               className="font-display"
-
               style={{
-
-                fontSize:"clamp(42px,6vw,72px)",
-
-                lineHeight:1.05,
-
-                fontWeight:700,
-
-                margin:"22px 0"
-
+                fontSize: "clamp(42px,6vw,70px)",
+                lineHeight: 1.05,
+                fontWeight: 700,
+                margin: "22px 0",
               }}
-
             >
 
               <span className="gradient-text">
                 Sabelo Tshazi
               </span>
 
-              <br/>
+              <br />
 
+              engineers systems
+              <br />
 
-              builds technology
-              <br/>
+              where code,
+              <br />
 
-              through logic,
-              <br/>
-
-              systems & innovation.
-
+              data & networks connect.
 
             </h1>
-
-
           </Reveal>
 
 
 
-          <Reveal delay={150}>
-
-
+          <Reveal delay={160}>
             <p
-
               style={{
-
-                color:theme.mist,
-
-                fontSize:17,
-
-                lineHeight:1.8,
-
-                maxWidth:520,
-
-                marginBottom:28
-
+                color: theme.mist,
+                fontSize: 16,
+                lineHeight: 1.8,
+                maxWidth: 520,
+                marginBottom: 32,
               }}
-
             >
-
-              Computer Science and Mathematics graduate combining{" "}
-              
-              <strong>
-                algorithmic thinking, graph theory, software engineering,
-                and IT systems knowledge
-              </strong>
-
-              {" "}to design, build, and support reliable technology solutions.
-
-
+              BSc Computer Science and Mathematics graduate specialising in
+              software development, AI systems, cloud technologies, and IT
+              support. I combine programming, mathematical reasoning, and
+              systems thinking to build reliable technology solutions.
             </p>
-
-
           </Reveal>
 
 
 
-          <Reveal delay={200}>
-
-
-            <div
-
-              style={{
-
-                display:"flex",
-
-                gap:12,
-
-                flexWrap:"wrap",
-
-                marginBottom:30
-
-              }}
-
-            >
-
-
-              <div
-                className="card"
-                style={{
-                  padding:"12px 16px",
-                  display:"flex",
-                  alignItems:"center",
-                  gap:10
-                }}
-              >
-
-                <Network
-                  size={18}
-                  color={theme.signal}
-                />
-
-                <span
-                  style={{
-                    fontSize:13
-                  }}
-                >
-                  Graph Theory & Algorithms
-                </span>
-
-              </div>
-
-
-
-
-              <div
-                className="card"
-                style={{
-                  padding:"12px 16px",
-                  display:"flex",
-                  alignItems:"center",
-                  gap:10
-                }}
-              >
-
-                <BrainCircuit
-                  size={18}
-                  color={theme.signalSoft}
-                />
-
-                <span
-                  style={{
-                    fontSize:13
-                  }}
-                >
-                  AI & Intelligent Systems
-                </span>
-
-              </div>
-
-
-            </div>
-
-
-          </Reveal>
-
-
-
-
-          <Reveal delay={260}>
-
+          <Reveal delay={220}>
 
             <div
-
               style={{
-
                 display:"flex",
-
                 gap:14,
-
-                flexWrap:"wrap"
-
+                flexWrap:"wrap",
               }}
-
             >
-
 
               <a
                 href="#contact"
                 className="btn-primary"
               >
-
-                Get in touch
-
+                Let's connect
                 <ArrowUpRight size={15}/>
-
               </a>
-
 
 
               <a
@@ -259,35 +124,65 @@ export default function Hero() {
                 download
                 className="btn-outline"
               >
-
                 <Download size={15}/>
-
                 Download CV
-
               </a>
 
 
             </div>
 
-
           </Reveal>
 
+
+
+          <Reveal delay={300}>
+
+            <div
+              style={{
+                display:"flex",
+                gap:20,
+                marginTop:40,
+                flexWrap:"wrap",
+              }}
+            >
+
+              {[
+                "Graph Theory",
+                "Algorithms",
+                "AI Systems",
+                "Cloud Architecture",
+                "IT Operations",
+              ].map(item => (
+
+                <span
+                  key={item}
+                  className="font-mono"
+                  style={{
+                    fontSize:11,
+                    color:theme.slate,
+                    borderBottom:`1px solid ${theme.line}`,
+                    paddingBottom:6,
+                  }}
+                >
+                  {item}
+                </span>
+
+              ))}
+
+            </div>
+
+          </Reveal>
 
         </div>
 
 
 
-
-        <Reveal delay={220}>
-
-          <SignalPanel/>
-
+        <Reveal delay={200}>
+          <SignalPanel />
         </Reveal>
 
 
-
       </div>
-
 
     </section>
   );

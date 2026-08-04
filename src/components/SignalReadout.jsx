@@ -1,288 +1,725 @@
+import { useEffect, useState } from "react";
 import { theme } from "../theme";
 
-const nodes = [
-  { x: 80, y: 70 },
-  { x: 180, y: 40 },
-  { x: 280, y: 90 },
-  { x: 130, y: 180 },
-  { x: 240, y: 190 },
-];
 
-const connections = [
-  [0,1],
-  [1,2],
-  [0,3],
-  [3,4],
-  [2,4],
-  [1,4],
-];
+const architectures = [
 
+{
+name:"PRODUCTION WEB SYSTEM",
 
-export function SignalPanel() {
+description:
+"Request flow through frontend, backend services, database and cloud infrastructure.",
 
-  return (
+stack:
+"React • Node.js • REST API • MongoDB • AWS",
 
-    <div
+algorithm:
+"Shortest Path Routing",
 
-      style={{
+complexity:
+"O((V+E)logV)",
 
-        width:"100%",
 
-        height:360,
+nodes:[
+{id:"USER",x:40,y:130,type:"Client"},
+{id:"UI",x:130,y:70,type:"React"},
+{id:"API",x:230,y:130,type:"API"},
+{id:"DB",x:330,y:70,type:"Database"},
+{id:"CLOUD",x:330,y:200,type:"AWS"},
+],
 
-        borderRadius:20,
 
-        background:
-        "linear-gradient(145deg,#ffffff,#f8fafc)",
+flow:[
+"USER",
+"UI",
+"API",
+"DB",
+"CLOUD"
+]
 
-        border:`1px solid ${theme.line}`,
 
-        boxShadow:
-        "0 20px 50px rgba(15,23,42,.08)",
+},
 
-        position:"relative",
 
-        overflow:"hidden",
 
-      }}
+{
+name:"AI ENGINEERING PIPELINE",
 
-    >
+description:
+"Data processing pipeline from raw information to intelligent predictions.",
 
+stack:
+"Python • TensorFlow • Data Processing • ML API",
 
-      {/* Title */}
+algorithm:
+"Graph Traversal",
 
-      <div
+complexity:
+"O(V+E)",
 
-        style={{
 
-          position:"absolute",
+nodes:[
+{id:"DATA",x:50,y:130,type:"Dataset"},
+{id:"PROCESS",x:150,y:60,type:"Cleaning"},
+{id:"MODEL",x:250,y:130,type:"Model"},
+{id:"API",x:350,y:60,type:"Prediction"},
+{id:"APP",x:250,y:210,type:"Application"}
+],
 
-          top:20,
 
-          left:24,
+flow:[
+"DATA",
+"PROCESS",
+"MODEL",
+"API",
+"APP"
+]
 
-          fontFamily:"JetBrains Mono",
+},
 
-          fontSize:11,
 
-          color:theme.slate
 
-        }}
+{
+name:"CLOUD DEPLOYMENT",
 
-      >
+description:
+"Automated delivery pipeline from source code to production.",
 
-        SYSTEM GRAPH / ARCHITECTURE MODEL
+stack:
+"Git • CI/CD • Cloud • Monitoring",
 
-      </div>
+algorithm:
+"Pipeline Optimisation",
 
+complexity:
+"O(E)",
 
 
+nodes:[
+{id:"CODE",x:50,y:130,type:"Source"},
+{id:"GIT",x:150,y:60,type:"Version"},
+{id:"BUILD",x:250,y:130,type:"CI/CD"},
+{id:"CLOUD",x:350,y:60,type:"Deploy"},
+{id:"MON",x:250,y:210,type:"Monitor"}
+],
 
-      <svg
 
-        width="100%"
+flow:[
+"CODE",
+"GIT",
+"BUILD",
+"CLOUD",
+"MON"
+]
 
-        height="100%"
+},
 
-        viewBox="0 0 360 260"
 
-        style={{
 
-          marginTop:45
+{
+name:"ENTERPRISE SUPPORT PLATFORM",
 
-        }}
+description:
+"Customer issue resolution workflow using automation and knowledge systems.",
 
-      >
+stack:
+"Zendesk • Automation • Reporting",
 
+algorithm:
+"Workflow Graph",
 
-        {/* Connections */}
+complexity:
+"O(V+E)",
 
-        {connections.map((line,index)=>{
 
-          const start = nodes[line[0]];
-          const end = nodes[line[1]];
+nodes:[
+{id:"USER",x:50,y:130,type:"Customer"},
+{id:"TICKET",x:150,y:60,type:"Ticket"},
+{id:"AGENT",x:250,y:130,type:"Engineer"},
+{id:"FIX",x:350,y:60,type:"Solution"},
+{id:"DATA",x:250,y:210,type:"Analytics"}
+],
 
 
-          return (
-
-            <line
-
-              key={index}
-
-              x1={start.x}
-
-              y1={start.y}
-
-              x2={end.x}
-
-              y2={end.y}
-
-              stroke="#CBD5E1"
-
-              strokeWidth="2"
-
-            />
-
-          )
-
-        })}
-
-
-
-
-        {/* Data flow */}
-
-        {connections.map((line,index)=>{
-
-          const start = nodes[line[0]];
-          const end = nodes[line[1]];
-
-
-          return (
-
-            <circle
-
-              key={"pulse-"+index}
-
-              r="4"
-
-              fill="#03A9F4"
-
-            >
-
-              <animateMotion
-
-                dur={`${2 + index * .3}s`}
-
-                repeatCount="indefinite"
-
-                path={`M${start.x},${start.y} L${end.x},${end.y}`}
-
-              />
-
-            </circle>
-
-
-          )
-
-        })}
-
-
-
-
-
-        {/* Nodes */}
-
-        {nodes.map((node,index)=>(
-
-
-          <g key={index}>
-
-
-            <circle
-
-              cx={node.x}
-
-              cy={node.y}
-
-              r="18"
-
-              fill="white"
-
-              stroke="#03A9F4"
-
-              strokeWidth="3"
-
-            />
-
-
-            <circle
-
-              cx={node.x}
-
-              cy={node.y}
-
-              r="7"
-
-              fill="#9C27B0"
-
-            />
-
-
-          </g>
-
-
-        ))}
-
-
-
-      </svg>
-
-
-
-
-      <div
-
-        style={{
-
-          position:"absolute",
-
-          bottom:20,
-
-          left:24,
-
-          right:24,
-
-          display:"flex",
-
-          justifyContent:"space-between",
-
-          fontSize:12,
-
-          color:theme.mist,
-
-          fontFamily:"JetBrains Mono"
-
-        }}
-
-      >
-
-        <span>
-          Algorithms
-        </span>
-
-
-        <span>
-          Cloud Systems
-        </span>
-
-
-        <span>
-          Data Flow
-        </span>
-
-
-      </div>
-
-
-
-    </div>
-
-
-  );
+flow:[
+"USER",
+"TICKET",
+"AGENT",
+"FIX",
+"DATA"
+]
 
 }
-export function TraceDivider() {
-  return (
-    <div
-      style={{
-        width: "100%",
-        height: 1,
-        margin: "40px 0",
-        background:
-          "linear-gradient(90deg, transparent, #03A9F4, #9C27B0, transparent)",
-        opacity: 0.5,
-      }}
-    />
-  );
+
+];
+
+
+
+function getNode(nodes,id){
+
+return nodes.find(
+node=>node.id===id
+);
+
+}
+
+
+
+
+export function SignalPanel(){
+
+
+const [index,setIndex]=useState(0);
+
+const [step,setStep]=useState(0);
+
+
+const system=architectures[index];
+
+
+
+useEffect(()=>{
+
+
+const change=setInterval(()=>{
+
+
+setIndex(
+prev=>(prev+1)%architectures.length
+);
+
+
+setStep(0);
+
+
+},10000);
+
+
+
+return()=>clearInterval(change);
+
+
+},[]);
+
+
+
+useEffect(()=>{
+
+
+const animate=setInterval(()=>{
+
+
+setStep(prev=>{
+
+
+if(prev>=system.flow.length)
+return 0;
+
+
+return prev+1;
+
+
+});
+
+
+},1200);
+
+
+
+return()=>clearInterval(animate);
+
+
+
+},[system]);
+
+
+
+
+
+return(
+
+<div
+
+style={{
+
+background:"#fff",
+
+border:`1px solid ${theme.line}`,
+
+borderRadius:22,
+
+padding:26,
+
+boxShadow:
+"0 25px 70px rgba(15,23,42,.10)"
+
+}}
+
+>
+
+
+
+<div
+
+className="font-mono"
+
+style={{
+
+fontSize:11,
+
+color:theme.signal
+
+}}
+
+>
+
+SOFTWARE SYSTEM ANALYSER
+
+</div>
+
+
+
+
+<h2
+
+className="font-display"
+
+style={{
+
+fontSize:22,
+
+margin:"12px 0"
+
+}}
+
+>
+
+{system.name}
+
+</h2>
+
+
+
+
+<p
+
+style={{
+
+fontSize:13,
+
+lineHeight:1.6,
+
+color:theme.mist
+
+}}
+
+>
+
+{system.description}
+
+</p>
+
+
+
+
+
+<svg
+
+width="100%"
+
+height="260"
+
+viewBox="0 0 430 260"
+
+>
+
+
+
+{
+
+
+system.flow.map((item,i)=>{
+
+
+if(i===system.flow.length-1)
+return null;
+
+
+
+const start=getNode(
+system.nodes,
+item
+);
+
+
+const end=getNode(
+system.nodes,
+system.flow[i+1]
+);
+
+
+
+return(
+
+<line
+
+key={i}
+
+x1={start.x}
+
+y1={start.y}
+
+x2={end.x}
+
+y2={end.y}
+
+stroke={
+i < step
+? theme.signal
+:"#CBD5E1"
+}
+
+strokeWidth="4"
+
+/>
+
+
+)
+
+
+})
+
+
+}
+
+
+
+
+
+{
+
+
+system.flow.map((item,i)=>{
+
+
+if(i>=step)
+return null;
+
+
+
+const node=getNode(
+system.nodes,
+item
+);
+
+
+
+return(
+
+<circle
+
+key={item}
+
+cx={node.x}
+
+cy={node.y}
+
+r="8"
+
+fill={theme.signal}
+
+>
+
+<animate
+
+attributeName="r"
+
+values="6;14;6"
+
+dur="1s"
+
+repeatCount="indefinite"
+
+/>
+
+
+</circle>
+
+
+)
+
+
+})
+
+}
+
+
+
+
+
+{
+
+
+system.nodes.map(node=>{
+
+
+const active=
+system.flow.includes(node.id);
+
+
+
+return(
+
+<g key={node.id}>
+
+
+<circle
+
+cx={node.x}
+
+cy={node.y}
+
+r="25"
+
+fill={
+active
+?"#E0F7FF"
+:"#fff"
+}
+
+stroke={
+active
+?theme.signal
+:"#CBD5E1"
+}
+
+strokeWidth="3"
+
+/>
+
+
+
+
+<text
+
+x={node.x}
+
+y={node.y+4}
+
+textAnchor="middle"
+
+fontSize="10"
+
+fontWeight="700"
+
+>
+
+{node.id}
+
+</text>
+
+
+
+<text
+
+x={node.x}
+
+y={node.y+42}
+
+textAnchor="middle"
+
+fontSize="9"
+
+fill="#64748B"
+
+>
+
+{node.type}
+
+</text>
+
+
+
+</g>
+
+
+)
+
+
+})
+
+
+}
+
+
+
+</svg>
+
+
+
+
+
+
+<div
+
+style={{
+
+display:"grid",
+
+gridTemplateColumns:"1fr 1fr",
+
+gap:12
+
+}}
+
+>
+
+
+<div className="card"
+
+style={{padding:14}}
+
+>
+
+<span
+
+className="font-mono"
+
+style={{fontSize:10,color:theme.slate}}
+
+>
+
+ALGORITHM
+
+</span>
+
+
+<div>
+
+{system.algorithm}
+
+</div>
+
+
+</div>
+
+
+
+
+<div className="card"
+
+style={{padding:14}}
+
+>
+
+<span
+
+className="font-mono"
+
+style={{fontSize:10,color:theme.slate}}
+
+>
+
+COMPLEXITY
+
+</span>
+
+
+<div>
+
+{system.complexity}
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<div
+
+style={{
+
+marginTop:15,
+
+padding:12,
+
+background:"#F8FAFC",
+
+borderRadius:10,
+
+fontSize:12
+
+}}
+
+>
+
+
+<strong>TECH STACK:</strong>
+
+<br/>
+
+{system.stack}
+
+
+</div>
+
+
+
+
+
+<div
+
+style={{
+
+marginTop:15,
+
+display:"flex",
+
+justifyContent:"space-between",
+
+fontSize:12
+
+}}
+
+>
+
+<span>
+
+Nodes analysed: {system.nodes.length}
+
+</span>
+
+
+<span
+
+style={{
+
+color:theme.signal
+
+}}
+
+>
+
+System stable ✓
+
+</span>
+
+
+</div>
+
+
+
+</div>
+
+
+)
+
+
 }
