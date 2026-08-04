@@ -9,7 +9,7 @@ export default function Skills() {
       style={{
         maxWidth: 1100,
         margin: "0 auto",
-        padding: "20px 24px 60px"
+        padding: "20px 24px 60px",
       }}
     >
 
@@ -20,7 +20,9 @@ export default function Skills() {
           style={{
             fontSize: 30,
             fontWeight: 700,
-            margin: "10px 0 36px"
+            textAlign: "center",
+            margin: "10px 0 50px",
+            color: theme.paper,
           }}
         >
           Skills
@@ -31,9 +33,10 @@ export default function Skills() {
 
       <div
         style={{
-          display:"flex",
-          flexDirection:"column",
-          gap:35
+          display: "flex",
+          flexDirection: "column",
+          gap: 35,
+          alignItems: "center",
         }}
       >
 
@@ -44,65 +47,60 @@ export default function Skills() {
             delay={gi * 100}
           >
 
-            <div>
+            <div
+              style={{
+                width:"100%",
+                textAlign:"center"
+              }}
+            >
 
               <h3
                 className="font-mono"
                 style={{
                   fontSize:12,
                   color:group.color,
-                  marginBottom:18
+                  marginBottom:20,
+                  letterSpacing:"0.12em"
                 }}
               >
-                {group.group}
+                {group.group.toUpperCase()}
               </h3>
 
 
               <div
-
                 style={{
-
                   display:"flex",
-
                   flexWrap:"wrap",
-
-                  gap:22
-
+                  justifyContent:"center",
+                  gap:25
                 }}
-
               >
 
                 {group.items.map((item)=>(
 
                   <div
-
                     key={item.name}
-
                     title={item.name}
 
                     style={{
-
                       display:"flex",
-
                       flexDirection:"column",
-
                       alignItems:"center",
-
-                      gap:8,
-
-                      width:70
-
+                      gap:10,
+                      width:75,
+                      cursor:"pointer"
                     }}
 
+                    className="skill-icon"
                   >
+
 
                     <div
 
                       style={{
 
-                        width:52,
-
-                        height:52,
+                        width:58,
+                        height:58,
 
                         display:"flex",
 
@@ -110,13 +108,13 @@ export default function Skills() {
 
                         justifyContent:"center",
 
-                        borderRadius:12,
+                        borderRadius:16,
 
                         background:"#F8FAFC",
 
                         border:`1px solid ${theme.line}`,
 
-                        transition:"0.2s"
+                        transition:"all .3s ease",
 
                       }}
 
@@ -130,15 +128,20 @@ export default function Skills() {
 
                         style={{
 
-                          width:28,
+                          width:32,
 
-                          height:28
+                          height:32,
+
+                          objectFit:"contain",
+
+                          transition:"transform .3s ease"
 
                         }}
 
                       />
 
                     </div>
+
 
 
                     <span
@@ -149,7 +152,9 @@ export default function Skills() {
 
                         textAlign:"center",
 
-                        color:theme.mist
+                        color:theme.mist,
+
+                        fontWeight:500
 
                       }}
 
@@ -174,6 +179,7 @@ export default function Skills() {
 
 
       </div>
+
 
     </section>
   );

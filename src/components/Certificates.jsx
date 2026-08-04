@@ -1,6 +1,6 @@
 import { Award, ExternalLink } from "lucide-react";
 import Reveal from "./Reveal";
-import { certificates } from "../data/certificates";
+import { certificates } from "./../data/certificates";
 import { theme } from "../theme";
 
 export default function Certificates() {
@@ -37,8 +37,7 @@ export default function Certificates() {
       >
         {certificates.map((cert, index) => {
           const isPdf =
-            cert.link &&
-            cert.link.toLowerCase().endsWith(".pdf");
+            cert.link?.toLowerCase().endsWith(".pdf");
 
           return (
             <Reveal key={cert.title} delay={index * 70}>
@@ -61,30 +60,47 @@ export default function Certificates() {
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "space-between",
                     borderRadius: 14,
                     transition: "all .3s ease",
                     cursor: "pointer",
                   }}
                 >
-                  {/* Icon */}
+
+                  {/* Certificate Logo */}
                   <div
                     style={{
-                      width: 52,
-                      height: 52,
-                      borderRadius: 12,
-                      background:
-                        "linear-gradient(135deg,#03A9F4,#9C27B0)",
+                      width: 56,
+                      height: 56,
+                      borderRadius: 14,
+                      background: "#ffffff",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       marginBottom: 18,
+                      padding: 10,
+                      overflow: "hidden",
                     }}
                   >
-                    <Award size={26} color="#fff" />
+                    {cert.icon ? (
+                      <img
+                        src={cert.icon}
+                        alt={cert.issuer}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "contain",
+                        }}
+                      />
+                    ) : (
+                      <Award
+                        size={28}
+                        color="#03A9F4"
+                      />
+                    )}
                   </div>
 
-                  {/* Certificate Title */}
+
+                  {/* Title */}
                   <h3
                     className="font-display"
                     style={{
@@ -96,27 +112,29 @@ export default function Certificates() {
                     {cert.title}
                   </h3>
 
+
                   {/* Issuer */}
                   <p
                     style={{
                       color: theme.mist,
-                      margin: "12px 0 8px",
-                      lineHeight: 1.6,
+                      margin: "12px 0 10px",
                       fontSize: 14,
+                      lineHeight: 1.6,
                     }}
                   >
                     {cert.issuer}
                   </p>
 
+
                   {/* Category */}
                   <span
                     className="font-mono"
                     style={{
-                      display: "inline-block",
                       width: "fit-content",
-                      padding: "5px 10px",
+                      padding: "5px 12px",
                       borderRadius: 30,
-                      background: "rgba(3,169,244,.08)",
+                      background:
+                        "rgba(3,169,244,0.08)",
                       color: theme.signalSoft,
                       fontSize: 11,
                       marginBottom: 22,
@@ -125,32 +143,39 @@ export default function Certificates() {
                     {cert.category}
                   </span>
 
-                  {/* Button */}
+
+                  {/* Link */}
                   <div
                     style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
                       marginTop: "auto",
                       paddingTop: 14,
-                      borderTop: `1px solid ${theme.line}`,
+                      borderTop:
+                        `1px solid ${theme.line}`,
+                      display: "flex",
+                      justifyContent:
+                        "space-between",
+                      alignItems: "center",
                     }}
                   >
                     <span
                       style={{
                         color: theme.signal,
-                        fontWeight: 600,
                         fontSize: 14,
+                        fontWeight: 600,
                       }}
                     >
-                      {isPdf ? "View Certificate" : "Verify Certificate"}
+                      {isPdf
+                        ? "View Certificate"
+                        : "Verify Certificate"}
                     </span>
 
                     <ExternalLink
                       size={16}
                       color={theme.signal}
                     />
+
                   </div>
+
                 </div>
               </a>
             </Reveal>

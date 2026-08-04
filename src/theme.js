@@ -21,7 +21,7 @@ export const theme = {
 
 
   // Main brand gradient colors
-  signal: "#bbdfeb",
+  signal: "#298cad",
   signalSoft: "#9C27B0",
 
 
