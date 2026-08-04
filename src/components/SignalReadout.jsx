@@ -1,71 +1,274 @@
 import { theme } from "../theme";
 
-// A single animated "channel" of vertical bars, used in the hero panel.
-export function Channel({ label, color, bars = 22, height = 34, speed = [0.7, 1.3] }) {
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-      <span className="font-mono" style={{ width: 34, fontSize: 10, color, flexShrink: 0 }}>
-        {label}
-      </span>
-      <div style={{ display: "flex", alignItems: "flex-end", gap: 3, height }}>
-        {Array.from({ length: bars }).map((_, i) => {
-          const dur = (speed[0] + Math.random() * (speed[1] - speed[0])).toFixed(2);
-          const h = 25 + Math.random() * 75;
-          return (
-            <span
-              key={i}
-              className="skill-bar"
-              style={{
-                width: 3,
-                height: `${h}%`,
-                background: color,
-                opacity: 0.85,
-                animationDuration: `${dur}s`,
-                animationDelay: `${(i * 0.05).toFixed(2)}s`,
-              }}
-            />
-          );
-        })}
-      </div>
-    </div>
-  );
-}
+const nodes = [
+  { x: 80, y: 70 },
+  { x: 180, y: 40 },
+  { x: 280, y: 90 },
+  { x: 130, y: 180 },
+  { x: 240, y: 190 },
+];
 
-// The hero's signature element: three parallel channels (AI / WEB / IT)
-// standing in for the three domains Sabelo works across.
+const connections = [
+  [0,1],
+  [1,2],
+  [0,3],
+  [3,4],
+  [2,4],
+  [1,4],
+];
+
+
 export function SignalPanel() {
-  return (
-    <div className="card" style={{ padding: "22px 20px", display: "flex", flexDirection: "column", gap: 16 }}>
-      <div className="font-mono" style={{ fontSize: 10, color: theme.mist, display: "flex", justifyContent: "space-between" }}>
-        <span>SYSTEM.STATUS</span>
-        <span style={{ color: theme.pulse }}>● LIVE</span>
-      </div>
-      <Channel label="AI" color={theme.pulse} height={28} />
-      <Channel label="WEB" color={theme.signalSoft} height={28} />
-      <Channel label="IT" color={theme.slate} height={28} />
-    </div>
-  );
-}
 
-// A thin decorative version of the same motif, used between sections.
-export function TraceDivider() {
   return (
-    <div style={{ display: "flex", justifyContent: "center", padding: "6px 0 46px" }}>
-      <div style={{ display: "flex", alignItems: "flex-end", gap: 2, height: 14, opacity: 0.5 }}>
-        {Array.from({ length: 40 }).map((_, i) => (
-          <span
-            key={i}
-            className="skill-bar"
-            style={{
-              width: 2,
-              height: `${20 + Math.random() * 80}%`,
-              background: i % 3 === 0 ? theme.pulse : i % 3 === 1 ? theme.signalSoft : theme.slate,
-              animationDuration: `${(0.8 + Math.random()).toFixed(2)}s`,
-              animationDelay: `${(i * 0.03).toFixed(2)}s`,
-            }}
-          />
-        ))}
+
+    <div
+
+      style={{
+
+        width:"100%",
+
+        height:360,
+
+        borderRadius:20,
+
+        background:
+        "linear-gradient(145deg,#ffffff,#f8fafc)",
+
+        border:`1px solid ${theme.line}`,
+
+        boxShadow:
+        "0 20px 50px rgba(15,23,42,.08)",
+
+        position:"relative",
+
+        overflow:"hidden",
+
+      }}
+
+    >
+
+
+      {/* Title */}
+
+      <div
+
+        style={{
+
+          position:"absolute",
+
+          top:20,
+
+          left:24,
+
+          fontFamily:"JetBrains Mono",
+
+          fontSize:11,
+
+          color:theme.slate
+
+        }}
+
+      >
+
+        SYSTEM GRAPH / ARCHITECTURE MODEL
+
       </div>
+
+
+
+
+      <svg
+
+        width="100%"
+
+        height="100%"
+
+        viewBox="0 0 360 260"
+
+        style={{
+
+          marginTop:45
+
+        }}
+
+      >
+
+
+        {/* Connections */}
+
+        {connections.map((line,index)=>{
+
+          const start = nodes[line[0]];
+          const end = nodes[line[1]];
+
+
+          return (
+
+            <line
+
+              key={index}
+
+              x1={start.x}
+
+              y1={start.y}
+
+              x2={end.x}
+
+              y2={end.y}
+
+              stroke="#CBD5E1"
+
+              strokeWidth="2"
+
+            />
+
+          )
+
+        })}
+
+
+
+
+        {/* Data flow */}
+
+        {connections.map((line,index)=>{
+
+          const start = nodes[line[0]];
+          const end = nodes[line[1]];
+
+
+          return (
+
+            <circle
+
+              key={"pulse-"+index}
+
+              r="4"
+
+              fill="#03A9F4"
+
+            >
+
+              <animateMotion
+
+                dur={`${2 + index * .3}s`}
+
+                repeatCount="indefinite"
+
+                path={`M${start.x},${start.y} L${end.x},${end.y}`}
+
+              />
+
+            </circle>
+
+
+          )
+
+        })}
+
+
+
+
+
+        {/* Nodes */}
+
+        {nodes.map((node,index)=>(
+
+
+          <g key={index}>
+
+
+            <circle
+
+              cx={node.x}
+
+              cy={node.y}
+
+              r="18"
+
+              fill="white"
+
+              stroke="#03A9F4"
+
+              strokeWidth="3"
+
+            />
+
+
+            <circle
+
+              cx={node.x}
+
+              cy={node.y}
+
+              r="7"
+
+              fill="#9C27B0"
+
+            />
+
+
+          </g>
+
+
+        ))}
+
+
+
+      </svg>
+
+
+
+
+      <div
+
+        style={{
+
+          position:"absolute",
+
+          bottom:20,
+
+          left:24,
+
+          right:24,
+
+          display:"flex",
+
+          justifyContent:"space-between",
+
+          fontSize:12,
+
+          color:theme.mist,
+
+          fontFamily:"JetBrains Mono"
+
+        }}
+
+      >
+
+        <span>
+          Algorithms
+        </span>
+
+
+        <span>
+          Cloud Systems
+        </span>
+
+
+        <span>
+          Data Flow
+        </span>
+
+
+      </div>
+
+
+
     </div>
+
+
   );
+
 }

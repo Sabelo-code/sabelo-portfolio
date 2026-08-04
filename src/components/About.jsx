@@ -1,11 +1,28 @@
-import { Briefcase, Cpu, Award } from "lucide-react";
+import { Briefcase, Cpu, Award, Code2 } from "lucide-react";
 import Reveal from "./Reveal";
 import { theme } from "../theme";
 
 const stats = [
-  { label: "Years Experience", value: "1+", icon: Briefcase },
-  { label: "Projects Built", value: "10+", icon: Cpu },
-  { label: "Certifications", value: "20+", icon: Award },
+  {
+    label: "Professional Experience",
+    value: "1+ Year",
+    icon: Briefcase,
+  },
+  {
+    label: "Projects Delivered",
+    value: "10+",
+    icon: Cpu,
+  },
+  {
+    label: "Technical Certifications",
+    value: "6+",
+    icon: Award,
+  },
+  {
+    label: "Technologies",
+    value: "15+",
+    icon: Code2,
+  },
 ];
 
 export default function About() {
@@ -15,23 +32,23 @@ export default function About() {
       style={{
         maxWidth: 1100,
         margin: "0 auto",
-        padding: "20px 24px 60px",
+        padding: "40px 24px 80px",
       }}
     >
 
       <Reveal>
 
-      <h2
-  className="font-display"
-  style={{
-    fontSize: 30,
-    fontWeight: 700,
-    marginBottom: 36,
-    textAlign: "center",
-  }}
->
-  About
-</h2>
+        <h2
+          className="font-display"
+          style={{
+            fontSize: 34,
+            fontWeight: 700,
+            textAlign: "center",
+            marginBottom: 50,
+          }}
+        >
+          About Me
+        </h2>
 
       </Reveal>
 
@@ -39,60 +56,83 @@ export default function About() {
       <div
         className="about-grid"
         style={{
-          display:"grid",
-          gridTemplateColumns:"1.4fr 1fr",
-          gap:48,
-          alignItems:"start"
+          display: "grid",
+          gridTemplateColumns: "1.3fr 1fr",
+          gap: 55,
+          alignItems: "center",
         }}
       >
 
 
-        {/* Description */}
+        {/* About Text */}
 
         <Reveal delay={80}>
 
           <p
             style={{
-              fontSize:18,
-              lineHeight:1.8,
-              color:theme.paper
+              fontSize: 19,
+              lineHeight: 1.8,
+              color: theme.paper,
             }}
           >
-            I'm a <strong>BSc Computer Science and Mathematics graduate</strong>{" "}
-            focused on building practical technology solutions through software
-            development, IT support, cloud computing, and artificial intelligence.
+            I'm a{" "}
+            <strong>
+              BSc Computer Science and Mathematics graduate
+            </strong>{" "}
+            passionate about building reliable technology solutions that solve
+            real-world problems.
+          </p>
+
+
+          <p
+            style={{
+              fontSize: 15,
+              lineHeight: 1.9,
+              color: theme.mist,
+              marginTop: 18,
+            }}
+          >
+            My experience combines{" "}
+            <strong>
+              software development, IT support, cloud technologies, and
+              customer experience systems.
+            </strong>{" "}
+            Through the CAPACITI Digital Associate Programme, I gained
+            practical experience in IT service operations, Zendesk
+            administration, AWS Cloud Foundations, cybersecurity fundamentals,
+            and AI-driven solutions.
+          </p>
+
+
+          <p
+            style={{
+              fontSize: 15,
+              lineHeight: 1.9,
+              color: theme.mist,
+              marginTop:18,
+            }}
+          >
+            I have built web applications, implemented support workflows,
+            developed data-driven solutions, and supported business users with
+            technical challenges. I enjoy transforming complex problems into
+            simple, scalable, and user-friendly solutions.
           </p>
 
 
           <p
             style={{
               fontSize:15,
-              lineHeight:1.8,
+              lineHeight:1.9,
               color:theme.mist,
-              marginTop:16
+              marginTop:18
             }}
           >
-            Through the <strong>CAPACITI Digital Associate Programme</strong>,
-            I gained hands-on experience in IT service desk operations,
-            Zendesk administration, AWS Cloud Foundations, cybersecurity
-            fundamentals, and AI technologies. I have worked on customer
-            support platforms, workflow improvements, web applications,
-            and data-driven solutions.
-          </p>
-
-
-          <p
-            style={{
-              fontSize:15,
-              lineHeight:1.8,
-              color:theme.mist,
-              marginTop:16
-            }}
-          >
-            I enjoy solving technical challenges and creating reliable,
-            user-focused systems. My goal is to bridge the gap between
-            technology and people by building solutions that are efficient,
-            scalable, and easy to use.
+            Currently seeking opportunities in{" "}
+            <strong>
+              IT Support, Systems Support, Cloud, and Software Development
+              roles
+            </strong>{" "}
+            where I can contribute technical skills while continuing to grow.
           </p>
 
 
@@ -103,72 +143,93 @@ export default function About() {
 
         {/* Stats */}
 
+        <Reveal delay={150}>
 
-        <Reveal delay={160}>
 
           <div
             style={{
-              display:"flex",
-              flexDirection:"column",
-              gap:14
+              display:"grid",
+              gridTemplateColumns:"1fr",
+              gap:16
             }}
           >
 
-          {stats.map((stat)=>(
 
-            <div
-
-              key={stat.label}
-
-              className="card"
-
-              style={{
-
-                padding:"18px",
-
-                display:"flex",
-
-                alignItems:"center",
-
-                justifyContent:"space-between"
-
-              }}
-
-            >
+            {stats.map((stat)=>(
 
               <div
-
+                key={stat.label}
+                className="card"
                 style={{
-
+                  padding:"20px",
                   display:"flex",
-
                   alignItems:"center",
-
-                  gap:12
-
+                  justifyContent:"space-between",
+                  transition:"all .3s ease",
                 }}
 
               >
 
-                <stat.icon
-                  size={20}
-                  color={theme.signal}
-                />
+
+                <div
+                  style={{
+                    display:"flex",
+                    alignItems:"center",
+                    gap:15
+                  }}
+                >
+
+                  <div
+                    style={{
+                      width:45,
+                      height:45,
+                      borderRadius:12,
+                      display:"flex",
+                      alignItems:"center",
+                      justifyContent:"center",
+                      background:
+                      "linear-gradient(135deg,#03A9F4,#9C27B0)"
+                    }}
+                  >
+
+                    <stat.icon
+                      size={22}
+                      color="white"
+                    />
+
+                  </div>
+
+
+                  <span
+                    style={{
+                      fontSize:14,
+                      color:theme.mist
+                    }}
+                  >
+                    {stat.label}
+                  </span>
+
+
+                </div>
+
 
 
                 <span
 
+                  className="font-display"
+
                   style={{
-
-                    fontSize:13,
-
-                    color:theme.mist
-
+                    fontSize:24,
+                    fontWeight:700,
+                    background:
+                    "linear-gradient(135deg,#03A9F4,#9C27B0)",
+                    WebkitBackgroundClip:"text",
+                    WebkitTextFillColor:"transparent",
                   }}
 
                 >
 
-                  {stat.label}
+                  {stat.value}
 
                 </span>
 
@@ -176,43 +237,17 @@ export default function About() {
               </div>
 
 
-
-              <span
-
-                className="font-display"
-
-                style={{
-
-                  fontSize:24,
-
-                  fontWeight:700,
-
-                  background:theme.primaryGradient,
-
-                  WebkitBackgroundClip:"text",
-
-                  color:"transparent"
-
-                }}
-
-              >
-
-                {stat.value}
-
-              </span>
-
-
-            </div>
-
-          ))}
+            ))}
 
 
           </div>
+
 
         </Reveal>
 
 
       </div>
+
 
     </section>
   );
