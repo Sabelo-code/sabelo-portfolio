@@ -6,7 +6,9 @@ import Projects from "./components/Projects";
 import Experience from "./components/Experience";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import { TraceDivider } from "./components/SignalReadout";
+// Inside your Hero.jsx or App.jsx
+import { SignalPanel, TraceDivider } from "./components/SignalReadout"; // Or your correct path
+
 import AIChat from "./components/AIChat";
 import Certificates from "./components/Certificates"
 

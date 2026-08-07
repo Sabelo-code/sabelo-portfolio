@@ -34,7 +34,7 @@ export const education = [
   {
     title: "AI & IT Support Bootcamp",
     company: "CAPACITI Digital Associate Programme",
-    meta: "Sep 2025 — Feb 2026",
+    meta: "Oct 2025 — Feb 2026",
     desc:
       "Completed intensive training focused on IT service desk operations, Zendesk administration, AWS Cloud Foundations, cybersecurity fundamentals, artificial intelligence, automation, and modern software development practices.",
     icon: BookOpen,
@@ -57,5 +57,5 @@ export const education = [
 
 export default {
   experience,
-  education,
+  education ,
 };

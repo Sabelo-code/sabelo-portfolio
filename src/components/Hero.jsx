@@ -262,15 +262,7 @@ flexWrap:"wrap"
 
 {[
 
-"Software Engineering",
 
-"System Design",
-
-"Algorithms",
-
-"Cloud Architecture",
-
-"AI Engineering"
 
 ].map(item=>(
 

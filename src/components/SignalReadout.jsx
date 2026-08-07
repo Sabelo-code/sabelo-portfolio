@@ -2,218 +2,148 @@ import { useEffect, useState } from "react";
 import { theme } from "../theme";
 
 
-const architectures = [
+const profileTrace = [
 
-{
-name:"PRODUCTION WEB SYSTEM",
+  {
+    command: "profile.load('Sabelo Tshazi')",
+    result: "BSc Computer Science & Mathematics"
+  },
 
-description:
-"Request flow through frontend, backend services, database and cloud infrastructure.",
+  {
+    command: "engineering.initialize()",
+    result: "Software Engineering | System Design | Problem Solving"
+  },
 
-stack:
-"React • Node.js • REST API • MongoDB • AWS",
+  {
+    command: "stack.detect()",
+    result: "React • Node.js • Python • JavaScript • SQL"
+  },
 
-algorithm:
-"Shortest Path Routing",
+  {
+    command: "cloud.connect()",
+    result: "AWS Cloud • REST APIs • Deployment Workflows"
+  },
 
-complexity:
-"O((V+E)logV)",
+  {
+    command: "projects.scan()",
+    result: "AI Sentiment Analysis • MERN Applications • ASERION"
+  },
 
+  {
+    command: "experience.load()",
+    result: "Zendesk Administration • IT Support • Automation"
+  },
 
-nodes:[
-{id:"USER",x:40,y:130,type:"Client"},
-{id:"UI",x:130,y:70,type:"React"},
-{id:"API",x:230,y:130,type:"API"},
-{id:"DB",x:330,y:70,type:"Database"},
-{id:"CLOUD",x:330,y:200,type:"AWS"},
-],
+  {
+    command: "algorithms.load()",
+    result: "Graph Theory • Data Structures • Algorithms"
+  },
 
-
-flow:[
-"USER",
-"UI",
-"API",
-"DB",
-"CLOUD"
-]
-
-
-},
-
-
-
-{
-name:"AI ENGINEERING PIPELINE",
-
-description:
-"Data processing pipeline from raw information to intelligent predictions.",
-
-stack:
-"Python • TensorFlow • Data Processing • ML API",
-
-algorithm:
-"Graph Traversal",
-
-complexity:
-"O(V+E)",
-
-
-nodes:[
-{id:"DATA",x:50,y:130,type:"Dataset"},
-{id:"PROCESS",x:150,y:60,type:"Cleaning"},
-{id:"MODEL",x:250,y:130,type:"Model"},
-{id:"API",x:350,y:60,type:"Prediction"},
-{id:"APP",x:250,y:210,type:"Application"}
-],
-
-
-flow:[
-"DATA",
-"PROCESS",
-"MODEL",
-"API",
-"APP"
-]
-
-},
-
-
-
-{
-name:"CLOUD DEPLOYMENT",
-
-description:
-"Automated delivery pipeline from source code to production.",
-
-stack:
-"Git • CI/CD • Cloud • Monitoring",
-
-algorithm:
-"Pipeline Optimisation",
-
-complexity:
-"O(E)",
-
-
-nodes:[
-{id:"CODE",x:50,y:130,type:"Source"},
-{id:"GIT",x:150,y:60,type:"Version"},
-{id:"BUILD",x:250,y:130,type:"CI/CD"},
-{id:"CLOUD",x:350,y:60,type:"Deploy"},
-{id:"MON",x:250,y:210,type:"Monitor"}
-],
-
-
-flow:[
-"CODE",
-"GIT",
-"BUILD",
-"CLOUD",
-"MON"
-]
-
-},
-
-
-
-{
-name:"ENTERPRISE SUPPORT PLATFORM",
-
-description:
-"Customer issue resolution workflow using automation and knowledge systems.",
-
-stack:
-"Zendesk • Automation • Reporting",
-
-algorithm:
-"Workflow Graph",
-
-complexity:
-"O(V+E)",
-
-
-nodes:[
-{id:"USER",x:50,y:130,type:"Customer"},
-{id:"TICKET",x:150,y:60,type:"Ticket"},
-{id:"AGENT",x:250,y:130,type:"Engineer"},
-{id:"FIX",x:350,y:60,type:"Solution"},
-{id:"DATA",x:250,y:210,type:"Analytics"}
-],
-
-
-flow:[
-"USER",
-"TICKET",
-"AGENT",
-"FIX",
-"DATA"
-]
-
-}
+  {
+    command: "career.status()",
+    result: "AVAILABLE FOR SOFTWARE ENGINEERING OPPORTUNITIES"
+  }
 
 ];
 
 
 
-function getNode(nodes,id){
+export function SignalPanel(){
 
-return nodes.find(
-node=>node.id===id
+const [active,setActive] = useState(0);
+const [typed,setTyped] = useState("");
+const [showResult,setShowResult] = useState(false);
+
+
+
+const current = profileTrace[active];
+
+
+
+/*
+ Type command animation
+*/
+
+useEffect(()=>{
+
+
+let index = 0;
+
+
+setTyped("");
+
+setShowResult(false);
+
+
+
+const typing = setInterval(()=>{
+
+
+setTyped(
+current.command.substring(0,index)
 );
+
+
+index++;
+
+
+
+if(index > current.command.length){
+
+
+clearInterval(typing);
+
+
+setTimeout(()=>{
+
+setShowResult(true);
+
+
+},300);
+
 
 }
 
 
 
-
-export function SignalPanel(){
-
-
-const [index,setIndex]=useState(0);
-
-const [step,setStep]=useState(0);
-
-
-const system=architectures[index];
+},45);
 
 
 
-useEffect(()=>{
-
-
-const change=setInterval(()=>{
-
-
-setIndex(
-prev=>(prev+1)%architectures.length
-);
-
-
-setStep(0);
-
-
-},10000);
+return()=>clearInterval(typing);
 
 
 
-return()=>clearInterval(change);
+},[active]);
 
 
-},[]);
 
+
+
+/*
+ Move to next system step
+*/
 
 
 useEffect(()=>{
 
 
-const animate=setInterval(()=>{
+if(!showResult)
+return;
 
 
-setStep(prev=>{
+
+const timer=setTimeout(()=>{
 
 
-if(prev>=system.flow.length)
+setActive(prev=>{
+
+
+if(prev >= profileTrace.length-1){
+
 return 0;
+
+}
 
 
 return prev+1;
@@ -222,407 +152,230 @@ return prev+1;
 });
 
 
-},1200);
+},1500);
 
 
 
-return()=>clearInterval(animate);
+return()=>clearTimeout(timer);
 
 
 
-},[system]);
+},[showResult]);
 
 
 
 
 
-return(
-
-<div
-  className="signal-card"
-  style={{
-    background: "#ffffff",
-    border: `1px solid ${theme.line}`,
-    borderRadius: 18,
-    padding: 24,
-    boxShadow: "0 20px 50px rgba(15,23,42,.08)",
-  }}
->
-
-
+return (
 
 <div
-
-className="font-mono"
 
 style={{
 
-fontSize:11,
+background:"#020617",
 
-color:theme.signal
+borderRadius:18,
+
+border:"1px solid rgba(148,163,184,.25)",
+
+padding:24,
+
+boxShadow:
+"0 25px 70px rgba(2,6,23,.35)",
+
+fontFamily:"JetBrains Mono, monospace"
 
 }}
 
 >
 
-SOFTWARE SYSTEM ANALYSER
+
+
+{/* Terminal Header */}
+
+
+<div
+
+style={{
+
+display:"flex",
+
+alignItems:"center",
+
+gap:8,
+
+marginBottom:22
+
+}}
+
+>
+
+
+<span
+
+style={{
+
+width:11,
+
+height:11,
+
+borderRadius:"50%",
+
+background:"#EF4444"
+
+}}
+
+/>
+
+
+<span
+
+style={{
+
+width:11,
+
+height:11,
+
+borderRadius:"50%",
+
+background:"#EAB308"
+
+}}
+
+/>
+
+
+<span
+
+style={{
+
+width:11,
+
+height:11,
+
+borderRadius:"50%",
+
+background:"#22C55E"
+
+}}
+
+/>
+
+
+<span
+
+style={{
+
+marginLeft:12,
+
+fontSize:11,
+
+color:"#94A3B8"
+
+}}
+
+>
+
+sabelo@portfolio:~$
+
+</span>
+
 
 </div>
 
 
 
 
-<h2
 
-className="font-display"
+{/* Terminal Body */}
+
+
+<div>
+
+
+<div
 
 style={{
 
-fontSize:22,
+fontSize:12,
 
-margin:"12px 0"
+color:"#38BDF8",
+
+marginBottom:25
 
 }}
 
 >
 
-{system.name}
+SABELO.SYSTEM 
 
-</h2>
-
-
+</div>
 
 
-<p
+
+
+
+{
+
+
+profileTrace
+.slice(0,active)
+.map((item,index)=>(
+
+
+<div
+
+key={index}
+
+style={{
+
+marginBottom:18
+
+}}
+
+>
+
+
+<div
 
 style={{
 
 fontSize:13,
 
-lineHeight:1.6,
-
-color:theme.mist
+color:"#E2E8F0"
 
 }}
 
 >
 
-{system.description}
+<span style={{color:"#38BDF8"}}>
 
-</p>
+$
 
+</span>
 
+{" "}
 
+{item.command}
 
-
-<svg
-
-width="100%"
-
-height="260"
-
-viewBox="0 0 430 260"
-
->
-
-
-
-{
-
-
-system.flow.map((item,i)=>{
-
-
-if(i===system.flow.length-1)
-return null;
-
-
-
-const start=getNode(
-system.nodes,
-item
-);
-
-
-const end=getNode(
-system.nodes,
-system.flow[i+1]
-);
-
-
-
-return(
-
-<line
-
-key={i}
-
-x1={start.x}
-
-y1={start.y}
-
-x2={end.x}
-
-y2={end.y}
-
-stroke={
-i < step
-? theme.signal
-:"#CBD5E1"
-}
-
-strokeWidth="4"
-
-/>
-
-
-)
-
-
-})
-
-
-}
-
-
-
-
-
-{
-
-
-system.flow.map((item,i)=>{
-
-
-if(i>=step)
-return null;
-
-
-
-const node=getNode(
-system.nodes,
-item
-);
-
-
-
-return(
-
-<circle
-
-key={item}
-
-cx={node.x}
-
-cy={node.y}
-
-r="8"
-
-fill={theme.signal}
-
->
-
-<animate
-
-attributeName="r"
-
-values="6;14;6"
-
-dur="1s"
-
-repeatCount="indefinite"
-
-/>
-
-
-</circle>
-
-
-)
-
-
-})
-
-}
-
-
-
-
-
-{
-
-
-system.nodes.map(node=>{
-
-
-const active=
-system.flow.includes(node.id);
-
-
-
-return(
-
-<g key={node.id}>
-
-
-<circle
-
-cx={node.x}
-
-cy={node.y}
-
-r="25"
-
-fill={
-active
-?"#E0F7FF"
-:"#fff"
-}
-
-stroke={
-active
-?theme.signal
-:"#CBD5E1"
-}
-
-strokeWidth="3"
-
-/>
-
-
-
-
-<text
-
-x={node.x}
-
-y={node.y+4}
-
-textAnchor="middle"
-
-fontSize="10"
-
-fontWeight="700"
-
->
-
-{node.id}
-
-</text>
-
-
-
-<text
-
-x={node.x}
-
-y={node.y+42}
-
-textAnchor="middle"
-
-fontSize="9"
-
-fill="#64748B"
-
->
-
-{node.type}
-
-</text>
-
-
-
-</g>
-
-
-)
-
-
-})
-
-
-}
-
-
-
-</svg>
-
-
-
-
+</div>
 
 
 <div
 
 style={{
 
-display:"grid",
+fontSize:12,
 
-gridTemplateColumns:"1fr 1fr",
+color:"#22C55E",
 
-gap:12
+marginTop:5
 
 }}
 
 >
 
-
-<div className="card"
-
-style={{padding:14}}
-
->
-
-<span
-
-className="font-mono"
-
-style={{fontSize:10,color:theme.slate}}
-
->
-
-ALGORITHM
-
-</span>
-
-
-<div>
-
-{system.algorithm}
-
-</div>
-
-
-</div>
-
-
-
-
-<div className="card"
-
-style={{padding:14}}
-
->
-
-<span
-
-className="font-mono"
-
-style={{fontSize:10,color:theme.slate}}
-
->
-
-COMPLEXITY
-
-</span>
-
-
-<div>
-
-{system.complexity}
-
-</div>
-
+✓ {item.result}
 
 </div>
 
@@ -631,80 +384,171 @@ COMPLEXITY
 </div>
 
 
+))
 
+
+}
+
+
+
+
+
+
+
+{/* Current command */}
 
 
 <div
 
 style={{
 
-marginTop:15,
-
-padding:12,
-
-background:"#F8FAFC",
-
-borderRadius:10,
-
-fontSize:12
+marginBottom:18
 
 }}
 
 >
-
-
-<strong>TECH STACK:</strong>
-
-<br/>
-
-{system.stack}
-
-
-</div>
-
-
-
 
 
 <div
 
 style={{
 
-marginTop:15,
+fontSize:13,
 
-display:"flex",
-
-justifyContent:"space-between",
-
-fontSize:12
+color:"#E2E8F0"
 
 }}
 
 >
 
-<span>
+<span style={{color:"#38BDF8"}}>
 
-Nodes analysed: {system.nodes.length}
+$
 
 </span>
 
+{" "}
+
+{typed}
 
 <span
 
 style={{
 
-color:theme.signal
+animation:"blink 1s infinite"
 
 }}
 
 >
 
-System stable ✓
+_
 
 </span>
 
 
 </div>
+
+
+
+{
+
+
+showResult &&
+
+<div
+
+style={{
+
+fontSize:12,
+
+color:"#22C55E",
+
+marginTop:5
+
+}}
+
+>
+
+✓ {current.result}
+
+</div>
+
+
+}
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+{/* Footer */}
+
+
+<div
+
+style={{
+
+marginTop:25,
+
+paddingTop:15,
+
+borderTop:"1px solid rgba(148,163,184,.2)"
+
+}}
+
+>
+
+
+<div
+
+style={{
+
+fontSize:11,
+
+color:"#22C55E"
+
+}}
+
+>
+
+● SYSTEM ONLINE
+
+</div>
+
+
+<div
+
+style={{
+
+fontSize:11,
+
+color:"#94A3B8",
+
+marginTop:8
+
+}}
+
+>
+
+Building scalable software through code, mathematics and systems thinking.
+
+</div>
+
+
+</div>
+
 
 
 
@@ -713,18 +557,33 @@ System stable ✓
 
 )
 
-
 }
-export function TraceDivider() {
-  return (
-    <div
-      style={{
-        height: 1,
-        width: "100%",
-        margin: "50px 0",
-        background:
-          "linear-gradient(90deg, transparent, #CBD5E1, transparent)",
-      }}
-    />
-  );
+
+
+
+
+
+export function TraceDivider(){
+
+return (
+
+<div
+
+style={{
+
+height:1,
+
+width:"100%",
+
+margin:"50px 0",
+
+background:
+"linear-gradient(90deg, transparent,#CBD5E1,transparent)"
+
+}}
+
+/>
+
+)
+
 }
